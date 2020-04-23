@@ -26,6 +26,8 @@ class Controller{
             include : [{model : User },{model : Cabang}]
         })
         .then(data=>{
+            console.log (mean)
+            console.log (data)
             for(var i = 0 ; i < data.length ; i++){
                 jumlah += Number(data[i].rating)
             }
@@ -35,7 +37,7 @@ class Controller{
                 mean = "Belum ada"
                 console.log (mean)
             } else {
-            mean = mean = jumlah/data.length
+                mean = jumlah/data.length
             }
     
             res.render('rwlist',{data,error,session,mean,idCb,idRs})
@@ -95,6 +97,7 @@ class Controller{
         body.createdAt = new Date()
         body.updatedAt = new Date()
 
+        console.log(body);
         Review.create(body)
         .then(()=>{
             res.redirect(`/restaurant/${idRs}/cabang/reviews/${idCb}`)
