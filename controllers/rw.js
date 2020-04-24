@@ -18,14 +18,27 @@ class Controller{
         let idCb = req.params.cabang_id
         let error = req.query.error
         let session = req.session.user
+        let jumlah = 0;
+        let mean = 0;
 
         Review.findAll({
             where:{CabangId:idCb},
             include : [{model : User },{model : Cabang}]
         })
         .then(data=>{
-            // res.send(data)
-            res.render('rwlist',{data,error,session})
+            for(var i = 0 ; i < data.length ; i++){
+                jumlah += Number(data[i].rating)
+            }
+            mean = jumlah/data.length
+            
+            if(data.length == 0){
+                mean = "Belum ada"
+                console.log (mean)
+            } else {
+            mean = mean = jumlah/data.length
+            }
+    
+            res.render('rwlist',{data,error,session,mean,idCb,idRs})
         })
         .catch(err=>{
             res.send(err)
@@ -97,9 +110,9 @@ class Controller{
         let idUs = req.params.user_id
         let session = req.session.user
 
-        // if(Number(idUs) !== session.id){
-        //     res.redirect(`/restaurant/${idRs}/cabang/reviews/${idCb}`)
-        // }
+        if(Number(idUs) !== session.id){
+            res.redirect(`/restaurant/${idRs}/cabang/reviews/${idCb}`)
+        }
 
         Review.findOne({where : { CabangId:idCb , UserId : idUs}} )
         .then(data=>{
@@ -113,8 +126,6 @@ class Controller{
     
 
     static change(req,res){
-        // console.log(req.body)
-        // console.log(req.params)
         let session = req.session.user
         let idRs = req.params.restaurant_id
         let idCb = req.params.cabang_id
@@ -135,27 +146,6 @@ class Controller{
         .catch(err=>{
             res.send(err)
         })
-        Product.update({is_discontinued: true}, {
-            where: {id: req.params.product_id}
-        })
-        // Review.update({
-        //     review: req.body.review,
-        //     rating: Number(req.body.rating)
-        // }, {
-        //     where : {
-        //         UserId: req.params.restaurant_id,
-        //         CabangId: req.params.cabang_id,
-        //     }
-        // })
-        // .then(()=>{
-        //     res.redirect(`/restaurant/${idRs}/cabang/reviews/${idCb}`)
-        //     // res.redirect(`/restaurant/`)
-        // })
-        // .catch(err=>{
-        //     res.redirect(`/restaurant/${idRs}/cabang/reviews/${idCb}`)
-        //     // console.log("error mengganti review")
-        //     // res.send(err)
-        // })
     }
     
 
