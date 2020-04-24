@@ -1,0 +1,25 @@
+<%- include('../partials/header.ejs') %>
+<%- include('../partials/navbar.ejs') %>
+
+    <div class="container w-25">
+        <h3>
+            Menambahkan Review : <%= session.name %> (<%= session.username%>)
+        </h3>
+        <br>
+        <form action='/review/info/<%= idRs %>/<%= idCb %>/<%= session.id %>/change' method='post'>
+            <div class="form-group">
+                <label for = ""> Review </label>
+                <br>
+                <input type="text" class= "form-control" name="review" value=" "> 
+            </div>
+            <div class="form-group">
+                <label for = ""> Rating </label>
+                <br>
+                <input type="text" class= "form-control" name="rating" value=" "> 
+            </div>
+            <br>
+            <button type = "Submit" class="btn btn-primary"> Submit </button>
+        </form>
+    </div>
+
+<%- include('../partials/footer.ejs') %>

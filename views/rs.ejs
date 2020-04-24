@@ -1,0 +1,45 @@
+<%- include('../partials/header.ejs') %>
+<%- include('../partials/navbar.ejs') %>
+
+<div class="container">
+    <h1 class="text-center">Restaurant</h1>
+
+    <h5>Welcome back, <%= user.name %>.</h5>
+    <!-- <p1> <%= user.birth %></p1>
+    <p1> <%= user.email %></p1>
+    <p1> <%= user.username %></p1> -->
+
+    <br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id </th>
+                <th>Name</th>
+                <th>Owner</th>
+                <th>E-mail</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% data.forEach(el=>{ %>
+            <tr>
+                <td><%= el.id %></td>
+                <td><%= el.name%></td>
+                <td><%= el.owner%></td>
+                <td><%= el.email %></td>
+                <td>
+                    <a href="/restaurant/<%= el.id %>/cabang/list">
+                        <button type="button" class="btn btn-primary">List</button>
+                    </a>
+                    <a href="/restaurant/<%= el.id %>/cabang/reviews">
+                        <button type="button" class="btn btn-success">All Reviews</button>
+                    </a>
+                </td>
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
+
+<%- include('../partials/footer.ejs') %>

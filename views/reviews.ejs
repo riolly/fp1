@@ -1,0 +1,37 @@
+<%- include('../partials/header.ejs') %>
+<%- include('../partials/navbar.ejs') %>
+
+<div class="container">
+    <h1 class="text-center">Review Restaurant</h1>
+
+    <br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>CabangId </th>
+                <th>UserId</th>
+                <!-- <th>Restoran</th>
+                <th>Cabang</th>
+                <th>Costumer</th> -->
+                <th>Rating</th>
+                <th>Review</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% data.forEach(el=>{ %>
+            <tr>
+                    <td><%= el.CabangId %></td>
+                    <td><%= el.UserId %></td>
+                <!-- <td><%= el.rating %></td>
+                <td><%= el.rating %></td>
+                <td><%= el.rating %></td> -->
+                <td><%= el.rating %></td>
+                <td><%= el.review %></td>
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
+
+<%- include('../partials/footer.ejs') %>

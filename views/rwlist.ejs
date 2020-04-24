@@ -1,0 +1,46 @@
+<%- include('../partials/header.ejs') %>
+<%- include('../partials/navbar.ejs') %>
+
+<div class="container">
+    <h1 class="text-center">List Review</h1>
+    <%let jumlah = 0 %>
+    <%for (var i = 0 ; i < data.length ; i ++){ jumlah=+ Number(data[i].rating)} %>
+    <h1 class="text-center">Rating Cabang ini : <%= jumlah %> </h1>
+    <br>
+    <div class="form-inline my-2 my-lg-0">
+        <h2> Anda Login Sebagai <%= session.username %></h2>
+        <a href = '/review/info/<%=data[0].Cabang.RestaurantId%>/<%=data[0].CabangId%>/add/user/<%=session.id%>'>
+            <button type="button" class="btn btn-success mx-2 my-2 my-sm-0">Add Reviews</button>
+        </a>
+    </div>
+    <br>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>name(username)</th>
+                <th>email</th>
+                <th>review</th>
+                <th>rating</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% data.forEach(el=>{ %>
+            <tr>
+                <td><%= el.getFullInfo()%></td>
+                <td><%= el.User.email%></td>
+                <td><%= el.review%></td>
+                <td><%= el.rating%></td>
+                <td>
+                <a href="/review/info/<%=el.Cabang.RestaurantId%>/<%=el.CabangId%>/<%=el.UserId%>/edit">
+                    <button type="button" class="btn btn-warning">Edit</button>
+                </a>
+                </td>
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
+
+<%- include('../partials/footer.ejs') %>

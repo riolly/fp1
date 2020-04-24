@@ -1,0 +1,46 @@
+<%- include('../partials/header.ejs') %>
+<%- include('../partials/navbar.ejs') %>
+
+    <div class="container">
+        <h1 class="text-center">List Cabang Restaurant</h1>
+        <h1 class="text-center"><%= data.name %> </h1>
+        <div class="form-inline my-2 my-lg-0">
+            <h2 class="mx-2 my-2 my-sm-0"> Owner: <%= data.owner %></h2>
+            <a href = '/restaurant/<%= data.id %>/cabang/list/add'>
+                <button type="button" class="btn btn-primary my-2 my-sm-0">Add</button>
+            </a>
+        </div>
+        
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id </th>
+                    <th>Cabang</th>
+                    <th>No.Telp</th>
+                    <th>Alamat</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+    
+            <tbody>
+                <% data.Cabangs.forEach(el=>{ %>
+                <tr>
+                    <td><%= el.id %></td>
+                    <td><%= el.cabang%></td>
+                    <td><%= el.no_telp%></td>
+                    <td><%= el.alamat %></td>
+                    <td>
+                        <a href="/restaurant/<%= el.RestaurantId %>/cabang/list/<%= el.id %>/edit">
+                            <button type="button" class="btn btn-warning">Edit</button>
+                        </a>
+                        <a href="/restaurant/<%= el.RestaurantId %>/cabang/list/<%= el.id %>/delete" onclick="return confirm('Are you sure?')">
+                            <button type="button" class="btn btn-danger">Delete</button>
+                        </a>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+
+<%- include('../partials/footer.ejs') %>

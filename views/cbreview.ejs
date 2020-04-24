@@ -1,0 +1,37 @@
+<%- include('../partials/header.ejs') %>
+<%- include('../partials/navbar.ejs') %>
+
+    <div class="container">
+        <h1 class="text-center"> Reviews Cabang</h1>
+        <h1 class="text-center"><%= dataRs.name %> </h1>
+        <h2>Owner: <%= dataRs.owner %></h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id </th>
+                    <th>Cabang</th>
+                    <th>No.Telp</th>
+                    <th>Alamat</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+    
+            <tbody>
+                <% dataCb.forEach(el=>{ %>
+                <tr>
+                    <td><%= el.id %></td>
+                    <td><%= el.cabang%></td>
+                    <td><%= el.no_telp%></td>
+                    <td><%= el.alamat %></td>
+                    <td>
+                        <a href='/restaurant/<%= el.RestaurantId %>/cabang/reviews/<%= el.id %>'>
+                            <button type="button" class="btn btn-success">Lihat Review di Cabang ini</button>
+                        </a>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+
+<%- include('../partials/footer.ejs') %>
